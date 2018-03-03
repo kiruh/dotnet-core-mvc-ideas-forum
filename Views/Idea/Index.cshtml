@@ -1,0 +1,31 @@
+@model IEnumerable<Ideas.Models.Idea>
+
+@{
+    ViewData["Title"] = "Ideas";
+}
+
+<h2>Ideas</h2>
+<hr />
+
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col-md-2">
+            <div>
+                <strong>@Html.DisplayFor(modelItem => item.User.FullName)</strong>
+            </div>
+            <div>
+                <span>@Html.DisplayFor(modelItem => item.CreatedAt)</span>
+            </div>
+            <div>
+                <a asp-action="Details" asp-route-id="@item.Id">View</a>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="alert alert-info well-lg">
+                @Html.DisplayFor(modelItem => item.Text)
+            </div>
+        </div>
+    </div>
+}

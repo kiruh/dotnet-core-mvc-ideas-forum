@@ -1,0 +1,13 @@
+@using Ideas.Models
+
+@{User user = (User)ViewBag.User;}
+
+@if (user != null)
+{
+    <li><a asp-area="" asp-controller="Idea" asp-action="MyIdeas">My Ideas</a></li>
+    @if (user.IsAdmin){
+        <li>
+            <a asp-area="" asp-controller="Idea" asp-action="AllIdeas">All Ideas</a>
+        </li>
+    }
+}

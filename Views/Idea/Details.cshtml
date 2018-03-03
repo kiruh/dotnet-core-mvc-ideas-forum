@@ -1,0 +1,71 @@
+@model Ideas.Models.DetailsViewModel
+
+@{
+    ViewData["Title"] = "Ideas";
+}
+
+<h2>Idea</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-2">
+        <div>
+            <strong>@Html.DisplayFor(modelItem => Model.Idea.User.FullName)</strong>
+        </div>
+        <div>
+            <span>@Html.DisplayFor(modelItem => Model.Idea.CreatedAt)</span>
+        </div>
+        @if (ViewBag.Editable) {
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model.Idea.Id">Edit</a>
+            </div>
+        }
+    </div>
+    <div class="col-md-10">
+        <div class="alert alert-info well-lg">
+            @Html.DisplayFor(modelItem => Model.Idea.Text)
+        </div>
+    </div>
+</div>
+
+<h2>Comments</h2>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        @foreach (var item in Model.Idea.Comments)
+        {
+            <div class="row">
+                <div class="col-md-4">
+                    <div>
+                        <strong>@Html.DisplayFor(modelItem => item.User.FullName)</strong>
+                    </div>
+                    <div>
+                        <span>@Html.DisplayFor(modelItem => item.CreatedAt)</span>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="well well-lg">
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </div>
+                </div>
+            </div>
+        }
+        @if (ViewBag.ShowCommentForm) {
+            <form asp-action="Create" asp-controller="Comment" asp-route-returnurl="/Idea/Details/@(@Model.Idea.Id)">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="NewComment.IdeaId" value="@Model.Idea.Id" />
+                <div class="form-group">
+                    <label asp-for="NewComment.Text" class="control-label"></label>
+                    <textarea asp-for="NewComment.Text" class="form-control"></textarea>
+                    <span asp-validation-for="NewComment.Text" class="text-danger" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary btn-block" />
+                </div>
+            </form>
+        }
+        else {
+            <a asp-action="Login" asp-controller="Account">Log in to leave a comment</a>
+        }
+    </div>
+</div>

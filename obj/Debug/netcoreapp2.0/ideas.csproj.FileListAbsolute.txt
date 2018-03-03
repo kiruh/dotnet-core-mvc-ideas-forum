@@ -1,0 +1,10 @@
+/home/kirill/ideas/bin/Debug/netcoreapp2.0/ideas.deps.json
+/home/kirill/ideas/bin/Debug/netcoreapp2.0/ideas.runtimeconfig.json
+/home/kirill/ideas/bin/Debug/netcoreapp2.0/ideas.runtimeconfig.dev.json
+/home/kirill/ideas/bin/Debug/netcoreapp2.0/ideas.dll
+/home/kirill/ideas/bin/Debug/netcoreapp2.0/ideas.pdb
+/home/kirill/ideas/obj/Debug/netcoreapp2.0/ideas.csproj.CoreCompileInputs.cache
+/home/kirill/ideas/obj/Debug/netcoreapp2.0/ideas.AssemblyInfoInputs.cache
+/home/kirill/ideas/obj/Debug/netcoreapp2.0/ideas.AssemblyInfo.cs
+/home/kirill/ideas/obj/Debug/netcoreapp2.0/ideas.dll
+/home/kirill/ideas/obj/Debug/netcoreapp2.0/ideas.pdb

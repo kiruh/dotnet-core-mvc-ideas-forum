@@ -1,0 +1,42 @@
+@model IEnumerable<Ideas.Models.Idea>
+
+@{
+    ViewData["Title"] = "My Ideas";
+}
+
+<h2>My Ideas</h2>
+<hr />
+
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col-md-2">
+            <div>
+                <strong>@Html.DisplayFor(modelItem => item.User.FullName)</strong>
+            </div>
+            <div>
+                <span>@Html.DisplayFor(modelItem => item.CreatedAt)</span>
+            </div>
+            @if (item.Approved) {
+                <div>
+                    <a asp-action="Details" asp-route-id="@item.Id">View</a>
+                </div>
+            } else {
+                <div>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                </div>
+            }
+        </div>
+        <div class="col-md-10">
+            @{string approvedClass = item.Approved ? "alert-success" : "alert-warning";}
+            <div class="alert well-lg @(approvedClass)">
+                @Html.DisplayFor(modelItem => item.Text)
+            </div>
+        </div>
+    </div>
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create an Idea</a>
+</p>
