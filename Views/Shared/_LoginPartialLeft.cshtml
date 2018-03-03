@@ -2,12 +2,13 @@
 
 @{User user = (User)ViewBag.User;}
 
+<li><a asp-area="" asp-controller="Idea" asp-action="Index">All Ideas</a></li>
 @if (user != null)
 {
     <li><a asp-area="" asp-controller="Idea" asp-action="MyIdeas">My Ideas</a></li>
     @if (user.IsAdmin){
         <li>
-            <a asp-area="" asp-controller="Idea" asp-action="AllIdeas">All Ideas</a>
+            <a asp-area="" asp-controller="Idea" asp-action="AllIdeas">Admin List</a>
         </li>
     }
 }
