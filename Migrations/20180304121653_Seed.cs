@@ -35,11 +35,24 @@ namespace ideas.Migrations
                 (
                     b'1',
                     ""Hey guys, maybe we should create some library for \
-                    managing state in react applications!It's gonna \
+                    managing state in react applications! It's gonna \
                     have immutable state and developers are gonna be able \
                     to access it from any place in their programs."",
                     (SELECT Id FROM User WHERE Login = ""dan""),
                     ""2015-03-03 04:58:00""
+                ),
+                (
+                    b'1',
+                    ""What do you think about flamethrowers? I think about \
+                    selling one."",
+                    (SELECT Id FROM User WHERE Login = ""elon""),
+                    ""2017-12-21 04:58:00""
+                ),
+                (
+                    b'1',
+                    ""I'm gonna make money selling hats!"",
+                    (SELECT Id FROM User WHERE Login = ""elon""),
+                    ""2017-12-23 04:58:00""
                 ),
                 (
                     b'1',

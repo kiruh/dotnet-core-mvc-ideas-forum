@@ -23,11 +23,17 @@ namespace ideas.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int? page)
         {
-            List<Idea> ideas = _context.Idea.Include(m => m.User).Where(i => i.Approved).ToList();
+            int PageSize = 5;
+            IQueryable<Idea> ideas =
+                _context
+                .Idea
+                .Include(m => m.User)
+                .Where(i => i.Approved)
+                .OrderByDescending(i => i.CreatedAt);
 
-            return View(ideas);
+            return View(await PaginatedList<Idea>.CreateAsync(ideas.AsNoTracking(), page ?? 1, PageSize));
         }
 
         [HttpGet]
@@ -130,7 +136,10 @@ namespace ideas.Controllers
             }
 
             User user = (User)RouteData.Values["User"];
-            ViewBag.UserId = user.Id;
+            if (user != null)
+            {
+                ViewBag.UserId = user.Id;
+            }
             ViewBag.Editable = user != null && user.Id == idea.UserId && !idea.Approved;
 
             DetailsViewModel model = new DetailsViewModel();
