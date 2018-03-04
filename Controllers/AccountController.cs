@@ -56,16 +56,9 @@ namespace Ideas.Controllers
         {
             if (ModelState.IsValid)
             {
-                user.Login = user.Login.ToLowerInvariant();
-
-                User existing = await _context.User.FirstOrDefaultAsync(
-                    u => u.Login == user.Login
-                );
-
-                if (existing == null)
+                bool created = await _context.RegisterUser(user);
+                if (created)
                 {
-                    _context.User.Add(user);
-                    await _context.SaveChangesAsync();
                     SaveUserToCookies(user);
                     return RedirectHome();
                 }

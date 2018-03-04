@@ -41,17 +41,25 @@ namespace ideas.Controllers
             return Redirect(returnUrl);
         }
 
-        // [CustomAuthorize]
-        // [HttpPost, ActionName("Delete")]
-        // [ValidateAntiForgeryToken]
-        // public async Task<IActionResult> DeleteConfirmed(int id)
-        // {
-        //     User user = (User)RouteData.Values["User"];
-        //     Idea idea =
-        //         await _context
-        //             .Idea
-        //             .Where(u => u.UserId == user.Id)
-        //             .FirstOrDefaultAsync(i => i.Id == id);
-        //     return RedirectToAction(nameof(MyIdeas));
+        [CustomAuthorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id, string returnUrl)
+        {
+            User user = (User)RouteData.Values["User"];
+            Comment comment =
+                await _context
+                    .Comment
+                    .Where(i => i.UserId == user.Id)
+                    .FirstOrDefaultAsync(i => i.Id == id);
+
+            if (comment != null)
+            {
+                _context.Comment.Remove(comment);
+                _context.SaveChanges();
+            }
+
+            return Redirect(returnUrl);
+        }
     }
 }

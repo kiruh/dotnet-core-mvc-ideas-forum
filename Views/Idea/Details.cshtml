@@ -13,7 +13,7 @@
             <strong>@Html.DisplayFor(modelItem => Model.Idea.User.FullName)</strong>
         </div>
         <div>
-            <span>@Html.DisplayFor(modelItem => Model.Idea.CreatedAt)</span>
+            <span>@Html.DisplayFor(modelItem => Model.Idea.CreatedAtDisplay)</span>
         </div>
         @if (ViewBag.Editable) {
             <div>
@@ -40,8 +40,22 @@
                         <strong>@Html.DisplayFor(modelItem => item.User.FullName)</strong>
                     </div>
                     <div>
-                        <span>@Html.DisplayFor(modelItem => item.CreatedAt)</span>
+                        <span>@Html.DisplayFor(modelItem => item.CreatedAtDisplay)</span>
                     </div>
+                    @if (item.UserId == ViewBag.UserId) {
+                        <div>
+                            <form 
+                                asp-area=""
+                                asp-action="Delete"
+                                asp-controller="Comment"
+                                asp-route-returnurl="/Idea/Details/@(@Model.Idea.Id)"
+                                asp-route-id="@item.Id"
+                                method="post"
+                            >
+                                <button type="submit" class="btn btn-link">Delete</button>
+                            </form>                
+                        </div>
+                    }
                 </div>
                 <div class="col-md-8">
                     <div class="well well-lg">

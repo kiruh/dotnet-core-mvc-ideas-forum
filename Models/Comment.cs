@@ -25,5 +25,13 @@ namespace Ideas.Models
 
         [Required]
         public DateTime CreatedAt { get; set; }
+
+        public string CreatedAtDisplay
+        {
+            get
+            {
+                return CreatedAt.ToString("MM/dd/yyyy hh:mm tt");
+            }
+        }
     }
 }

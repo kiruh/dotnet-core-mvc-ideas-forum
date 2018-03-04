@@ -16,15 +16,20 @@
                 <strong>@Html.DisplayFor(modelItem => item.User.FullName)</strong>
             </div>
             <div>
-                <span>@Html.DisplayFor(modelItem => item.CreatedAt)</span>
+                <span>@Html.DisplayFor(modelItem => item.CreatedAtDisplay)</span>
             </div>
             @if (item.Approved) {
                 <div>
-                    <a asp-action="Details" asp-route-id="@item.Id">View</a>
+                    <a class="btn btn-link" asp-action="Details" asp-route-id="@item.Id">View</a>
                 </div>
             } else {
                 <div>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-link" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                </div>
+                <div>
+                    <form asp-area="" asp-action="Delete" asp-route-id="@item.Id" method="post">
+                        <button type="submit" class="btn btn-link">Delete</button>
+                    </form>                
                 </div>
             }
         </div>

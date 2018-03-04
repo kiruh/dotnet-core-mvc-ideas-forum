@@ -89,16 +89,24 @@ namespace ideas.Controllers
         }
 
         [CustomAuthorize]
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             User user = (User)RouteData.Values["User"];
             Idea idea =
                 await _context
                     .Idea
-                    .Where(u => u.UserId == user.Id)
+                    .Where(i => i.UserId == user.Id)
+                    .Where(i => !i.Approved)
                     .FirstOrDefaultAsync(i => i.Id == id);
+
+            if (idea != null)
+            {
+                _context.Idea.Remove(idea);
+                _context.SaveChanges();
+            }
+
             return RedirectToAction(nameof(MyIdeas));
         }
 
@@ -122,6 +130,7 @@ namespace ideas.Controllers
             }
 
             User user = (User)RouteData.Values["User"];
+            ViewBag.UserId = user.Id;
             ViewBag.Editable = user != null && user.Id == idea.UserId && !idea.Approved;
 
             DetailsViewModel model = new DetailsViewModel();

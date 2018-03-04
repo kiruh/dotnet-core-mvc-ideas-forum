@@ -16,7 +16,7 @@
                 <strong>@Html.DisplayFor(modelItem => item.User.FullName)</strong>
             </div>
             <div>
-                <span>@Html.DisplayFor(modelItem => item.CreatedAt)</span>
+                <span>@Html.DisplayFor(modelItem => item.CreatedAtDisplay)</span>
             </div>
             <div>
                 <a asp-action="Details" asp-route-id="@item.Id">View</a>

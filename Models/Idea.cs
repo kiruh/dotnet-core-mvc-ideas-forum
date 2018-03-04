@@ -27,5 +27,13 @@ namespace Ideas.Models
         public bool Approved { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
+
+        public string CreatedAtDisplay
+        {
+            get
+            {
+                return CreatedAt.ToString("MM/dd/yyyy");
+            }
+        }
     }
 }
