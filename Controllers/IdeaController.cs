@@ -64,6 +64,8 @@ namespace ideas.Controllers
                 _context
                     .Idea
                     .Include(m => m.User)
+                    .OrderByDescending(i => i.CreatedAt)
+                    .OrderBy(i => i.Approved)
                     .ToList();
 
             return View(ideas);
